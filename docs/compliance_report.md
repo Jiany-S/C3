@@ -2,7 +2,7 @@
 
 Reviewed again on **18 October 2026**, using the complete local three-page C3 assignment, its chapter notes and lecture material. The source paths/hashes and detailed C3/C4 planning checklist remain in `source_manifest.json` and `requirements_checklist.md`. C4 implementation is still not authorized and has not begun.
 
-**Regrade: all mandatory technical requirements pass within the tested scope. Reflection is implemented and demonstrated. The Spaces bonus was attempted with approval but is blocked by Hugging Face account eligibility. GitHub publication and the actual student-recorded video are still required before submission is complete.** The professor provides no numerical C3 rubric, so no numerical grade is invented. A working tested system is not a claim of perfection on arbitrary model inputs.
+**Regrade: all mandatory technical requirements pass within the tested scope. Reflection is implemented and demonstrated. The Spaces bonus was attempted with approval but is blocked by Hugging Face account eligibility. The GitHub repository is now public; the required student-recorded demonstration video and its submission link remain outstanding.** The professor provides no numerical C3 rubric, so no numerical grade is invented. A working tested system is not a claim of perfection on arbitrary model inputs.
 
 The previous audit is preserved in `archive/initial_compliance_report.md`; it is historical, not the current result.
 
@@ -26,7 +26,7 @@ The notebook's stable cell IDs are listed below along with its visible section h
 | C3-12 | Detect calls, execute tools, return observations, generate final answer (p2) | `BusinessAgent.respond`, `Tools.execute`; notebook c3-13 | Matching tool-call IDs and actual persistent records; API/storage/step-limit tests | PASS |
 | C3-13 | Gradio ChatInterface (p2) | `app.build_demo` contains an actual `gr.ChatInterface` inside styled `gr.Blocks`; notebook c3-21 | Real HTTP/queue probe and browser interaction; 50-test suite includes UI | PASS |
 | C3-14 | Executable notebook, dependencies, local .env excluded (pp1,3) | Notebook, requirements, `.env.example`, `.gitignore` | 11/11 notebook code cells; clean dependency check; secret/exclusion audit | PASS |
-| C3-15 | GitHub repository and functionality video (p3) | Local Git project; exact `docs/video_demo_plan.md` | Ready locally; GitHub publication and actual recording not yet done | PARTIAL - user submission steps |
+| C3-15 | GitHub repository and functionality video (p3) | Public repository `Jiany-S/C3`; exact `docs/video_demo_plan.md` | GitHub is public; actual recording and submission link not yet done | PARTIAL - video pending |
 | C3-16 | Runs successfully (p3) | Complete local app/notebook | Automated, real API, reflection and browser evidence below | PASS locally |
 
 The modern `OpenAI().chat.completions.create` syntax preserves the assignment's intended behavior while replacing its old `openai.ChatCompletion` example. MCP-style schemas are documented and exercised through native function calls; this project does not claim to run an MCP server.
@@ -67,12 +67,12 @@ Raw result fields for human review remain pending; `evidence/demo/quality_review
 
 ## Remaining limits and actions
 
-- No numerical grade: C3 has no published point allocation. The implementation is ready for review; the overall submission is incomplete until GitHub and the video are submitted, and the smaller hosting bonus remains blocked.
+- No numerical grade: C3 has no published point allocation. The implementation is ready for review; the overall submission is incomplete until the mandatory video is recorded and submitted with the public GitHub repository, and the smaller hosting bonus remains blocked.
 - Semantic routing, note/consent interpretation, factual generation and reflection are model-dependent. The current English scenarios passed; exhaustive ambiguity, Arabic conversation, long-history behavior and statistical repeatability have not been established.
 - There is no calendar, email service, payment gateway, CRM or official university affiliation. Records are classroom JSONL, not production storage. Hosted local storage would be temporary across restarts/rebuilds.
 - The history window is finite and no cross-session personal memory or model learning is claimed. The UI uses per-session history and per-request trace results.
 - API errors, malformed tool inputs, disk failures, invalid contacts, step limits and post-write errors were tested. Live outage behavior is not inferred from mocks.
 - Keep the key, HF token, any future deployment credentials and runtime logs out of Git and the recording. Fictional example.com demonstration evidence is intentionally included.
-- Follow `docs/video_demo_plan.md` for exact camera actions and narration. Record your own actual screen/voice; screenshots are not a video. Add the actual video link to the GitHub README and publish the prepared project to your chosen GitHub repository.
+- Follow `docs/video_demo_plan.md` for exact camera actions and narration. Record your own actual screen/voice; screenshots are not a video. Add the actual video link to the already-public GitHub README and submit the repository URL alongside the video.
 - Arrange eligible Hugging Face access only if you want to pursue the smaller bonus. Nothing has been purchased automatically.
 - **Stop at C3. C4 requires a separate explicit approval.**
