@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-18",
+  "local_key_literal_in_staged_files": "ABSENT",
+  "excluded_env_virtualenv_logs_cache_course_text": "PASS",
+  "staged_pdf_exact_byte_match": "PASS",
+  "git_whitespace_check": "PASS",
+  "remote_publication": "NOT DONE",
+  "video": "NOT RECORDED",
+  "c4_implementation": "NOT STARTED",
+  "note": "Actual fictional API/browser evidence is intentionally included; raw runtime directories remain ignored."
+}

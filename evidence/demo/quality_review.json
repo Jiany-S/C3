@@ -1,0 +1,56 @@
+{
+  "reviewer": "Codex manual inspection of actual answers and saved records; not a human review",
+  "source_run": "20261018T104346Z",
+  "cases": {
+    "general_price": {
+      "functional_review": "PASS",
+      "notes": "Matches source facts and expected tool outcome."
+    },
+    "price_not_lead": {
+      "functional_review": "PASS",
+      "notes": "Matches source facts and expected tool outcome."
+    },
+    "lead_missing_fields": {
+      "functional_review": "PASS",
+      "notes": "Matches source facts and expected tool outcome."
+    },
+    "lead_followup": {
+      "functional_review": "PASS",
+      "notes": "Uses prior project notes, saves actual supplied contact, acknowledges local save and response target as an aim."
+    },
+    "memory_followup": {
+      "functional_review": "PASS",
+      "notes": "Matches source facts and expected tool outcome."
+    },
+    "unknown_policy": {
+      "functional_review": "PASS",
+      "notes": "Matches source facts and expected tool outcome."
+    },
+    "explicit_feedback": {
+      "functional_review": "PASS",
+      "notes": "Matches source facts and expected tool outcome."
+    },
+    "mixed_known_unknown": {
+      "functional_review": "PASS",
+      "notes": "Correct published price, scholarship described as unpublished rather than categorically nonexistent; actual feedback record saved."
+    },
+    "exact_availability": {
+      "functional_review": "PASS",
+      "notes": "Matches source facts and expected tool outcome."
+    },
+    "decline_contact": {
+      "functional_review": "PASS",
+      "notes": "Matches source facts and expected tool outcome."
+    },
+    "invalid_email": {
+      "functional_review": "PASS",
+      "notes": "Correctly rejects invalid email and saves nothing, but redundantly asks for project/service notes despite Team Sprint already being stated.",
+      "answer_efficiency": "PARTIAL"
+    },
+    "unsupported_request": {
+      "functional_review": "PASS",
+      "notes": "Matches source facts and expected tool outcome."
+    }
+  },
+  "limits": "One run per case; no statistical robustness claim. Raw human_quality_review fields remain PENDING for user review."
+}

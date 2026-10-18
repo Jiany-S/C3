@@ -1,0 +1,34 @@
+{
+  "reviewed_date": "2026-10-18",
+  "source": "local files supplied by user",
+  "files": [
+    {
+      "path": "C3 - Introduction to Agents\\C3 - Introduction to Agents - Deck.pdf",
+      "sha256": "a3f370ad494f5eeb3b81fbcdc1abbbe1522248c5e5dce08b274af343833df886"
+    },
+    {
+      "path": "C3 - Introduction to Agents\\C3 - Introduction to Agents.pdf",
+      "sha256": "238279b438a89d453de70c38ee433a180e39c174da07c9205c80a5565ea487fe"
+    },
+    {
+      "path": "C3 - Introduction to Agents\\C3 Ass\\C3 - Introduction to Agents-1.pdf",
+      "sha256": "578e87dfb0a2770cc8ea1f023fb3a3b2469e54fb562c4263e99fd0d20b413fb1"
+    },
+    {
+      "path": "C4 - Agent Personas & Thinking Mechanisms\\C4 - Agent Personas & Thinking Mechanisms - Deck.pdf",
+      "sha256": "0ce643089c2d5ee850518b434f6ecec0340d08dced0151824c071942b561078c"
+    },
+    {
+      "path": "C4 - Agent Personas & Thinking Mechanisms\\C4 - Agent Personas & Thinking Mechanisms.pdf",
+      "sha256": "255e2120196703b420423a988296b5aae7972b5d98a73dd9012b03264bf0bf49"
+    },
+    {
+      "path": "C4 - Agent Personas & Thinking Mechanisms\\C4 - Agent Personas Thinking Mechanisms.pdf",
+      "sha256": "44f716ed668b70165021b4cdec02df05f97557880108ee300798adbab83bce7a"
+    },
+    {
+      "path": "C4 - Agent Personas & Thinking Mechanisms\\C4 Ass\\C4 - Agent Personas Thinking Mechanisms Ass.pdf",
+      "sha256": "44f716ed668b70165021b4cdec02df05f97557880108ee300798adbab83bce7a"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "mode": "Real OpenAI API",
+  "model": "gpt-4.1-mini",
+  "source_run": "20261018T104346Z",
+  "data": "Only fictional demo identities and example.com addresses. No secrets or real customer contacts.",
+  "sha256": {
+    "feedback.jsonl": "9fe31644852cac4a865b43f1a05c871bd8652e52a13135bf9f39b73f7028ee28",
+    "initial_results.json": "c258520506a2a84f78e071ea486cae49e6bed68c649a313928a1312addf1c155",
+    "leads.jsonl": "6e836e839bd5126382d28e606f7a466decb7deca2fdbb1736ac0b5e5f0f50534",
+    "quality_review.json": "da4b83673544e24c312c87cb728704c90ee2e90472fa1229ca92e13c83615bb1",
+    "reflection_probe.json": "92c0df153909f0551eb2d7277213662cd446d42465766ec51c5db6d49f272aa1",
+    "results.json": "63d7fd1058ff02abfc10bc5d999825c5236352135e00e8a1283a8c076dfbd4e1",
+    "traces.jsonl": "e6523edf8c5914465a412517de3fe6b2b53df049957a75c537f826d95ab845fc"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "mode": "real Gradio server / MOCK model callback",
+  "url": "http://127.0.0.1:7861/",
+  "http_page": "PASS",
+  "config_chatbot": "PASS",
+  "queued_callback": "PASS",
+  "callback_output": "MOCK startup probe: startup probe; history=0"
+}

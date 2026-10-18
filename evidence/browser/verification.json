@@ -1,0 +1,11 @@
+{
+  "mode": "Actual browser UI + real OpenAI API",
+  "url": "http://127.0.0.1:7860",
+  "interactions": 4,
+  "grounded_answer": "PASS",
+  "multi_turn_lead_with_history": "PASS",
+  "memory_and_unknown_policy": "PASS",
+  "both_model_called_tools_saved": "PASS",
+  "data": "Fictional Browser Demo / browser.demo@example.com",
+  "video_recorded": false
+}

@@ -1,0 +1,15 @@
+{
+  "mode": "real API reviewer; intentionally injected flawed draft",
+  "draft": "Prototype Clinic costs USD 5, and your appointment is now confirmed.",
+  "model": "gpt-4.1-mini",
+  "reflection": {
+    "status": "revised",
+    "issues": [
+      "Incorrect price stated for Prototype Clinic (should be USD 30, not USD 5)",
+      "Incorrectly confirmed appointment, which is not possible",
+      "No tool call was made to confirm appointment or record lead"
+    ],
+    "revised_response": "Prototype Clinic costs USD 30 per student for a 60-minute online debugging and testing coaching session. If you want, I can help you request a follow-up from our staff. Just let me know your name, email, and a short note about your project or desired service."
+  },
+  "final": "Prototype Clinic costs USD 30 per student for a 60-minute online debugging and testing coaching session. If you want, I can help you request a follow-up from our staff. Just let me know your name, email, and a short note about your project or desired service."
+}
