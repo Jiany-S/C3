@@ -1,0 +1,31 @@
+{
+  "files": [
+    "README.md",
+    "agent.py",
+    "app.py",
+    "me/about_business.pdf",
+    "me/business_summary.txt",
+    "me/summary.txt",
+    "prompts.py",
+    "requirements.txt"
+  ],
+  "sha256": {
+    "README.md": "6e4aea4d9fd138df2cdd50d65d4d17cc650ff6f8a438351faf2875d204b1f278",
+    "agent.py": "ec7b79e871a62b8765ae87e6a8b00e6e4d6144c42913ce24b5ec927e6fd1f942",
+    "app.py": "3b7aa0cd0aaed38044e95f025298b58c37d416f13df3339e5d9bf10dd68e3db9",
+    "me/about_business.pdf": "48e4937920c2e124ca0b5d7cf0150a2409fec53d6ab3e8bef9a3339faaae6160",
+    "me/business_summary.txt": "bd1f22f930439dfe2bdd51ef7213713a21a052e463886a3c77b52b86974f0000",
+    "me/summary.txt": "bd1f22f930439dfe2bdd51ef7213713a21a052e463886a3c77b52b86974f0000",
+    "prompts.py": "0f3604a1eb00767d823282373662f6afafc8d2cbcb3161e0c6a7d07a5a7577b7",
+    "requirements.txt": "36e26bda86a5cb511d66c166f28dceed7e5745b53e44cf95d41b520100976191"
+  },
+  "credentials_in_package": false,
+  "published": false,
+  "proposed_repo": "Jiany-S/cedarbridge-c3",
+  "hardware": "cpu-basic or eligible free ZeroGPU; no paid hardware or plan purchase",
+  "visibility": "public source; application password protected",
+  "secrets_required": [
+    "OPENAI_API_KEY",
+    "SPACE_ACCESS_PASSWORD"
+  ]
+}

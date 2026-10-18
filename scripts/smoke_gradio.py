@@ -13,7 +13,7 @@ def run():
     class Probe:
         def respond(self, message, history):
             return f"MOCK startup probe: {message}; history={len(history)}"
-    demo = build_demo(Probe())
+    demo = build_demo(Probe(), show_evidence=False)
     try:
         _, url, _ = demo.launch(server_name="127.0.0.1", server_port=7861,
             share=False, prevent_thread_lock=True, quiet=True)

@@ -1,15 +1,17 @@
 {
-  "mode": "Real OpenAI API",
-  "model": "gpt-4.1-mini",
-  "source_run": "20261018T104346Z",
-  "data": "Only fictional demo identities and example.com addresses. No secrets or real customer contacts.",
+  "mode": "real OpenAI API",
+  "response_model": "gpt-4.1-mini",
+  "review_model": "gpt-4.1",
+  "source_run": "20261018T114513Z",
+  "data": "Fictional identities/example.com addresses only",
   "sha256": {
-    "feedback.jsonl": "9fe31644852cac4a865b43f1a05c871bd8652e52a13135bf9f39b73f7028ee28",
+    "feedback.jsonl": "a85a509a2d5c10f60619556a91ad0090c26e6ee5d5fc9a18867cd5e5c3105166",
     "initial_results.json": "c258520506a2a84f78e071ea486cae49e6bed68c649a313928a1312addf1c155",
-    "leads.jsonl": "6e836e839bd5126382d28e606f7a466decb7deca2fdbb1736ac0b5e5f0f50534",
-    "quality_review.json": "da4b83673544e24c312c87cb728704c90ee2e90472fa1229ca92e13c83615bb1",
+    "leads.jsonl": "1a2f07725210c0e1a677a388d4fe1022fe7f4142deea02ad2db5f673d1f95ef2",
+    "quality_review.json": "324bf20420df5cc5fde9abb6354ab6a4a69d84e82365aa73a28fa459e08c5ebc",
+    "README.md": "1522ad62cc893b434b41c0954b045c9067dcc35890bfdc5e4e5d0cba0fe1d70b",
     "reflection_probe.json": "92c0df153909f0551eb2d7277213662cd446d42465766ec51c5db6d49f272aa1",
-    "results.json": "63d7fd1058ff02abfc10bc5d999825c5236352135e00e8a1283a8c076dfbd4e1",
-    "traces.jsonl": "e6523edf8c5914465a412517de3fe6b2b53df049957a75c537f826d95ab845fc"
+    "results.json": "0fd52f7bd8fe8f2687693246fbceedaf39cd3ebe2931e4bb021e802217ba4f35",
+    "traces.jsonl": "147c4c2739d272fa0c5990e4f724b14818e67439d1dcd86cfc834134f00e6d44"
   }
 }

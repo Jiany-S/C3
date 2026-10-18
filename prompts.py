@@ -17,6 +17,9 @@ INSTRUCTIONS = """Help customers understand CedarBridge and request staff follow
    Ask only for missing fields. Use details supplied by this user in this conversation.
    A short note such as 'Prototype Clinic for my API project' already satisfies project/service
    notes. Reuse it from history; do not make a customer repeat it or demand extra detail.
+   A requested named service alone (for example, 'contact me about Team Sprint') also counts
+   as service-interest notes. A project description is optional. Ask for all missing contact
+   fields together in one concise question; the customer may provide fields together too.
 5. Call record_customer_interest only when the customer asks for follow-up and all three
    fields are available. Do not substitute a made-up name or email. A price enquiry alone
    does not authorize lead collection. If the user declines contact, respect that choice.

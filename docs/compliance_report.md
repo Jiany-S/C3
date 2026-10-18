@@ -1,93 +1,78 @@
-# C3 strict compliance report
+# C3 regrade and verification report
 
-Reviewed 18 October 2026, after re-reading all three pages of the local C3 assignment from beginning to end. See `requirements_checklist.md` and `source_manifest.json` for source paths, page references, hashes and the separate C4 planning checklist. No C4 implementation was started.
+Reviewed again on **18 October 2026**, using the complete local three-page C3 assignment, its chapter notes and lecture material. The source paths/hashes and detailed C3/C4 planning checklist remain in `source_manifest.json` and `requirements_checklist.md`. C4 implementation is still not authorized and has not begun.
 
-**Assessment: the local C3 application is implemented and working, with actual API/browser evidence. The submission is not yet complete because the GitHub publication and required video remain.** The C3 PDF gives no numeric grading rubric, so a numerical grade would be invented. All technical requirements below pass within the tested scope; that is not a guarantee of performance on arbitrary conversations.
+**Regrade: all mandatory technical requirements pass within the tested scope. Reflection is implemented and demonstrated. The Spaces bonus was attempted with approval but is blocked by Hugging Face account eligibility. GitHub publication and the actual student-recorded video are still required before submission is complete.** The professor provides no numerical C3 rubric, so no numerical grade is invented. A working tested system is not a claim of perfection on arbitrary model inputs.
 
-## Requirement-by-requirement evidence
+The previous audit is preserved in `archive/initial_compliance_report.md`; it is historical, not the current result.
 
-Notebook cell IDs are stable metadata IDs visible in the `.ipynb` JSON; the corresponding numbered section headings are visible in Jupyter. The notebook displays the actual imported implementation rather than duplicating it. It executes independently from a fresh kernel **with the complete project files present**, not as a notebook-only upload.
+## Requirements checked against implementation and actual evidence
 
-| ID | Requirement | Implementation / notebook evidence | Verification | Status |
+The notebook's stable cell IDs are listed below along with its visible section headings. It uses the tested modules supplied in the complete project, rather than a second divergent implementation.
+
+| ID | Requirement (C3 PDF) | Exact implementation / notebook section | Proof | Status |
 |---|---|---|---|---|
-| C3-01 | Fictional identity: name, mission, services, team, value | `scripts/build_business.py:SECTIONS`, `me/` files; notebook section 1, cell c3-01 | `test_load_both_sources`; visual review of full one-page PDF | PASS |
-| C3-02 | Required PDF and summary | `me/about_business.pdf`, `me/business_summary.txt`; `agent.load_business` | Both appear in actual system context; PDF rendered and checked for legibility/clipping | PASS |
-| C3-03 | Filename discrepancy in task text | `me/summary.txt`, identical to business_summary.txt | Byte equality in source test | PASS |
-| C3-04 | Distinct persona and instructions | `prompts.PERSONA`, `prompts.INSTRUCTIONS`; notebook c3-03 / c3-05 | Fresh-kernel notebook prints each under its own heading; prompt assembly assertion | PASS |
-| C3-05 | Three-way router before handling | `BusinessAgent.route/respond`, `ROUTE_POLICY`; notebook section 5, c3-09 | `test_three_real_branches`, malformed classifier tests; final real matrix 12/12 expected routes | PASS |
-| C3-06 | Exact lead tool; name/email/notes | `agent.record_customer_interest`, `Tools.record_customer_interest/execute`; notebook section 6, c3-11 | Actual lead call in final `demo/traces.jsonl`, saved lead f50fe285-4bbb-46b4-aadd-b002fc5c82e7; successful lead/invalid input/provenance tests; browser follow-up | PASS |
-| C3-07 | Unknown-question and feedback tool | `agent.record_feedback`, `Tools.record_feedback`; notebook c3-11 | Four actual final matrix feedback records; refund policy, explicit suggestion, scholarship and availability; browser refund record | PASS |
-| C3-08 | Logging and MCP-style schemas | `TOOL_SCHEMAS`, `JsonLog`, `docs/tools.md`; notebook c3-11 | Actual JSONL records and observations; schema/dispatch validation tests | PASS |
-| C3-09 | Assemble system prompt | `prompts.system_prompt`, `BusinessAgent.__init__`; notebook c3-07 | Assertion for PERSONA/INSTRUCTIONS/PDF/TXT; actual source-backed answers | PASS |
-| C3-10 | Character, grounding, encourage contact | `INSTRUCTIONS`, route-specific policies; notebook sections 2-5 | Agent review of actual twelve answers in `evidence/demo/quality_review.json`; known prices, unknown policies, refusal, grade-promise rejection | PASS with model-dependent limits |
-| C3-11 | Permitted API, input/history/tools | `OpenAIModel.complete`, `normalize_history`; notebook section 7, c3-13 | Installed SDK request/type tests; actual gpt-4.1-mini completions; history reaches router and generation | PASS |
-| C3-12 | Detect, execute, return tool observations; final answers | `BusinessAgent.respond`, `Tools.execute`; notebook c3-13 | Matching call IDs and structured observations; real persisted records; loop-limit, duplicate, storage and post-write API failure tests | PASS |
-| C3-13 | Working gr.ChatInterface | `app.build_demo`; notebook section 11, c3-21 | Real HTTP/config/queue smoke test; four actual browser interactions with real OpenAI and both tools | PASS |
-| C3-14 | Executable notebook, dependencies, local key excluded | `business_agent.ipynb`, requirements files, `.env.example`, `.gitignore` | All 11 code cells executed in fresh project kernel; tests passed; dependency check clean; Git inclusion audit | PASS |
-| C3-15 | GitHub repo and video | Local Git project prepared; `docs/video_demo_plan.md` specifies exact interactions | Local screenshots and traces exist, but no GitHub remote publication or recorded video is claimed | PARTIAL - user steps remain |
-| C3-16 | Runs successfully | Notebook + app + provider adapter + tools | 47 tests, 12-case real API run, real Gradio queue and browser, fresh notebook | PASS in tested local environment |
+| C3-01 | Name, mission, services, team, unique value (p1) | `scripts/build_business.py:SECTIONS`; `me/about_business.pdf`; notebook section 1 / c3-01 | Source-loading test; entire business PDF visually checked | PASS |
+| C3-02 | PDF plus business summary (pp1,3) | `me/about_business.pdf`, `me/business_summary.txt`; `agent.load_business` | Both source labels present in assembled prompt; source tests | PASS |
+| C3-03 | Task text's alternate summary filename (p1) | `me/summary.txt` compatibility copy | Exact byte-equality test with business_summary.txt | PASS |
+| C3-04 | Clearly separate persona and instructions (p2) | `prompts.PERSONA/INSTRUCTIONS`; notebook c3-03 / c3-05 | Fresh notebook prints both separately | PASS |
+| C3-05 | General / lead / feedback router before handling (p2) | `BusinessAgent.route/respond`, `prompts.ROUTE_POLICY`; notebook c3-09 | Branch tests; final real 12-case matrix and exact browser rehearsal | PASS |
+| C3-06 | `record_customer_interest(email,name,message)` (p2) | Standalone named function and `Tools.record_customer_interest/execute`; notebook c3-11 | Actual model call, returned observation and lead JSONL; missing/invalid input tests | PASS |
+| C3-07 | `record_feedback(question)` on unknown answers (p2) | Standalone named function and `Tools.record_feedback`; notebook c3-11 | Actual refund/suggestion/scholarship/availability saves; browser evidence | PASS |
+| C3-08 | Persistent logging and documented MCP-style schemas (p2) | `JsonLog`, `TOOL_SCHEMAS`, `docs/tools.md`; notebook c3-11 | Schema/dispatch tests and actual saved JSONL observations | PASS |
+| C3-09 | Assemble system prompt from persona/instructions/sources (p2) | `prompts.system_prompt`, `BusinessAgent.__init__`; notebook c3-07 | Prompt assembly assertion; both PDF/TXT loaded | PASS |
+| C3-10 | Business character, factual grounding, contact encouragement (p2) | `INSTRUCTIONS`, route handlers | Reviewed real answers: correct prices/hours, missing policies acknowledged, no grade/booking guarantees | PASS within tested prompts |
+| C3-11 | OpenAI or Gemini; input, history and tools (p2) | `OpenAIModel.complete`, `normalize_history`; notebook c3-13 | Installed SDK-type tests; real OpenAI requests; history passed to router/generation | PASS |
+| C3-12 | Detect calls, execute tools, return observations, generate final answer (p2) | `BusinessAgent.respond`, `Tools.execute`; notebook c3-13 | Matching tool-call IDs and actual persistent records; API/storage/step-limit tests | PASS |
+| C3-13 | Gradio ChatInterface (p2) | `app.build_demo` contains an actual `gr.ChatInterface` inside styled `gr.Blocks`; notebook c3-21 | Real HTTP/queue probe and browser interaction; 50-test suite includes UI | PASS |
+| C3-14 | Executable notebook, dependencies, local .env excluded (pp1,3) | Notebook, requirements, `.env.example`, `.gitignore` | 11/11 notebook code cells; clean dependency check; secret/exclusion audit | PASS |
+| C3-15 | GitHub repository and functionality video (p3) | Local Git project; exact `docs/video_demo_plan.md` | Ready locally; GitHub publication and actual recording not yet done | PARTIAL - user submission steps |
+| C3-16 | Runs successfully (p3) | Complete local app/notebook | Automated, real API, reflection and browser evidence below | PASS locally |
 
-The SDK syntax is intentionally modernized from the PDF's old `openai.ChatCompletion` example to `OpenAI().chat.completions.create`, preserving the required behavior. Source grounding uses both complete small documents directly in context. The assignment asks for MCP-style schema documentation, not a networked MCP server; no MCP transport is claimed.
+The modern `OpenAI().chat.completions.create` syntax preserves the assignment's intended behavior while replacing its old `openai.ChatCompletion` example. MCP-style schemas are documented and exercised through native function calls; this project does not claim to run an MCP server.
 
-## Actual verification outcomes
+## Actual checks, including the new audit
 
-| Check | Outcome | Scope / artifact |
+| Check | Actual outcome | Evidence / limits |
 |---|---|---|
-| Full automated suite | **47 passed**, 20.12 seconds | `evidence/pytest.xml`; scripted model behavior + installed SDK types + real Gradio construction |
-| Fresh notebook run | **11/11 code cells executed** | `evidence/notebook_execution.json`; real imports, deterministic tests, no paid notebook calls/server launch |
-| Dependency consistency | **No broken requirements** | `python -m pip check`; installed versions in `evidence/environment.txt` |
-| Gradio HTTP/config/queue | **PASS** | `evidence/gradio_smoke.json`; real server and client, deliberately mock model callback |
-| Final real API matrix | **12/12 route/tool checks passed** | gpt-4.1-mini, UTC run 20261018T104346Z; `evidence/demo/results.json`, actual traces and saved records |
-| Real browser + API | **Four interactions passed** | `evidence/browser/verification.json`, screenshots, traces; factual answer, multistep lead, memory plus unknown policy |
-| PDF layout | **PASS** | One page rendered with Poppler and visually checked; no clipped text or overlapping sections |
-| Real API outage/error injection | **NOT TESTED live** | Safe errors, malformed router outputs, storage failures and post-write failures tested with mocks; no deliberate invalid-key/provider-outage calls |
-| Human review | **PENDING** | `human_quality_review` fields in raw results intentionally remain pending; Codex's separate manual review is labeled as such |
+| Automated suite | **50 passed** | `evidence/pytest.xml`; deterministic scripted model behavior, installed SDK types, real Gradio construction |
+| Fresh notebook | **11/11 code cells executed** | `evidence/notebook_execution.json`; paid notebook calls and server launch disabled |
+| Dependency consistency | **No broken requirements** | `pip check`; pinned direct dependencies |
+| Real Gradio server/queue | **PASS** | `evidence/gradio_smoke.json`; real HTTP and Gradio client with deliberately mock model callback |
+| Final real assistant matrix | **12/12 route-and-tool checks passed** | `evidence/demo/results.json`; UTC run 20261018T114513Z; response/router gpt-4.1-mini, reviewer gpt-4.1 |
+| Controlled real reflection checks | **6/6 passed** | `evidence/reflection_check/results.json`; four correct drafts preserved, injected wrong price and false appointment corrected |
+| Exact video-prompt browser rehearsal | **PASS** | `evidence/review_browser/`; actual UI plus actual API; general, lead, memory, unknown policy and suggestion |
+| Business PDF layout | **PASS** | One page rendered and fully visually checked for clipping/overlap |
+| Live provider outage/auth/quota errors | **NOT TESTED live** | Error paths are covered by injected/mocked errors; no deliberate invalid-key or provider-outage traffic |
+| Spaces deployment | **BLOCKED** | Both approved free hardware attempts received provider HTTP 402; `evidence/space_deployment.json` |
 
-The final API matrix saved exactly **one fictional lead and four feedback records**. It took 53.45 seconds total for twelve turns (approximately 2.7-7.3 seconds per turn in that run). This is one observation per case, not a statistically reliable benchmark. The browser run separately saved one fictional lead and one feedback record. API calls incurred the configured provider's normal usage; no cost estimate is invented without billing evidence.
+Final real matrix: correct service price/duration; price-only interest without a lead save; lead collection across turns; memory follow-up; refund question; explicit suggestion; known price plus unknown scholarship; specific staff availability; refusal of contact; invalid email; and a request to promise an A. It saved one fictional lead and four feedback records. The run took 39.21 seconds total, about 2.6-4.4 seconds per turn. This is one recorded run per case, not statistical proof of model reliability.
 
-### Final actual demo matrix
+Raw result fields for human review remain pending; `evidence/demo/quality_review.json` is explicitly Codex's inspection, not a claim that the student or professor approved the results.
 
-| Case | Actual route | Actual successful tools | Functional result |
-|---|---|---|---|
-| Prototype Clinic price/duration | general | none | USD 30 / 60 minutes, grounded |
-| Interest in prices only | general | none | USD 60 Team Sprint, no unintended lead |
-| Staff follow-up, missing name/email | lead | none | Asks for missing contacts, retains supplied notes |
-| Name/email follow-up | lead | record_customer_interest | Saves supplied identity and previous project notes |
-| Which service did I ask about? | general | none | Recalls Prototype Clinic / API project |
-| Unpublished refund policy | feedback | record_feedback | Admits missing policy and acknowledges save |
-| Explicit evening-session suggestion | feedback | record_feedback | Acknowledges actual feedback save |
-| Known price + unknown scholarship | feedback | record_feedback | Correct price; scholarship described as unpublished |
-| Karim tomorrow at 14:00 | feedback | record_feedback | No calendar invented; saves question |
-| Decline contact, ask hours | general | none | Correct hours, no lead save |
-| Invalid email | lead | none | Requests valid email, no invalid record; minor extra clarification |
-| Override rules / promise an A | general | none | Rejects grade guarantee, stays in role |
+## What changed after regrading
 
-## Bonus evidence and quality limits
+- **Interface:** responsive studio layout, emerald theme, service cards, a clear send button, downloadable factual profile, and a collapsed classroom evidence panel. The panel receives the trace directly from the current request; it never reads the latest line of a shared log to identify a user's result. It is hidden on Spaces.
+- **Lead continuity:** a named desired service already supplies service-interest notes. The assistant can request missing name/email together. The final invalid-email case requests a corrected email without needlessly asking for already supplied name or service.
+- **Tool deduplication:** equivalent JSON calls with different whitespace/key order now reuse the same observation within a turn. The new test verifies only one write. Cross-turn retries can still create duplicate records; production idempotency is not claimed.
+- **Reflection:** the earlier small reviewer sometimes invented policy violations and rewrote correct clarifications. The review instructions now distinguish user requests from draft text, and the reviewer defaults to `gpt-4.1` (`OPENAI_REVIEW_MODEL`), while normal routing/replies remain on `gpt-4.1-mini`. The final six-case controlled check preserved all four good drafts and corrected both bad drafts. The earlier failed fixtures are retained as development evidence.
+- **Honest review logging:** all twelve ordinary replies in the final matrix passed review unchanged. That is a valid reflection outcome, not self-correction evidence. The separate injected-error fixtures demonstrate actual API correction. No injected draft is presented as a naturally generated failure.
+- **Hosting preparation:** eight-file allowlist package; key-free source; correct Space bind address; hidden diagnostic panel; password guard. Deployment was actually attempted, and its failure is documented rather than claimed as a bonus pass.
 
-**Reflection is implemented and actually exercised.** The final matrix logged nine unchanged reviews, two revisions with reported issues, and one issue-free rephrasing. These are observable edits, not proof that the reviewer improved every answer. Some natural review findings were overcritical or redundant: one complained about requesting name/email even though those fields were missing; another added a project-note clarification. The user-facing results stayed usable, but reflection quality should not be oversold.
+## Both bonuses, strictly assessed
 
-The separate `evidence/demo/reflection_probe.json` is stronger evidence of factual correction: a **deliberately injected** draft said USD 5 and claimed a confirmed appointment; a real API reviewer corrected the price to USD 30 and removed the booking claim. This was a diagnostic of the real reviewer, not a naturally generated agent failure and not a C4 experiment. The initial mock regression also demonstrates correction/error paths, clearly labeled as mock.
+**Reflection: PASS - implemented and demonstrated.** One real model review runs before the reply, with draft, findings, returned revision, reviewer model and final answer logged. In the controlled checks, USD 5 became the published USD 30, and a false appointment confirmation was removed. Four correct drafts remained unchanged. These fixtures exercise the actual reviewer on intentionally supplied drafts; they are not C4 experiments or fabricated live observations. Reflection can still make mistakes outside this small check, and a failed review is explicitly logged while retaining the original draft.
 
-**Spaces: NOT IMPLEMENTED/NOT DEPLOYED.** README metadata is preparation only. User approval and a hosting/data-storage decision are still required before deployment. The optional smaller bonus is not claimed.
+**Hugging Face Spaces: BLOCKED - not earned yet.** The user approved publication of `Jiany-S/cedarbridge-c3` with public source and password-protected app, storing the existing OpenAI key as a private Space secret, on no-cost hardware only. The provider rejected CPU Basic with HTTP 402 requiring PRO, then rejected ZeroGPU with HTTP 402 requiring eligible access (PRO, account eligibility or a grant). A read-only check confirmed the Space does not exist. No purchase occurred and no secrets were uploaded. `scripts/prepare_space.py` and `scripts/deploy_space.py` are ready for eligible access; prepared files or an attempted upload alone do not earn this bonus. A static page would not demonstrate the required working Gradio assistant, so no static substitute is claimed.
 
-## Strict critique and resolved failures
+## Remaining limits and actions
 
-- **Complexity:** one provider adapter, one router, one bounded native tool loop, two tools and one optional review. No vector database, agent framework, or unnecessary service. The notebook imports/displays the same implementation as the app to avoid drift. The supporting evidence is more extensive than a minimal class submission because reproducibility and independent review were requested.
-- **Routing:** the first live run passed 11/12 route/tool checks but failed to save a complete lead because the assistant demanded more project notes. The prompt now treats short supplied notes as sufficient; final live run and browser follow-up saved the lead. Price-only interest, mixed known/unknown questions, refusal and conversational follow-up were tested. Semantic accuracy outside this small English set is not established; Arabic dialogue, extreme ambiguity and long histories remain untested.
-- **Actual tool use:** both tools were genuinely requested by the model, executed and persisted. Definitions alone are not counted as proof. Validation blocks missing/extra fields and fabricated names/emails. Consent and note interpretation still depend on the model, and substring provenance is not identity verification.
-- **Provider integration:** modern installed SDK and real calls passed. Keys are loaded from the environment and excluded. API timeout/quota/authentication/error handling is mocked, not live outage-tested. The default model must be accessible to the user's account; arbitrary model overrides may not support the same parameters.
-- **Conversation continuity:** actual history-based lead collection and recall passed. A minor redundant project-note request remains in the invalid-email scenario. History is deliberately finite and cross-session recall is not claimed.
-- **Business grounding:** final prices/durations/hours matched the sources. An earlier draft treated unpublished scholarships as categorically unavailable; wording was corrected and the final live answer preserved uncertainty. No calendar/booking/email/grade guarantees were fabricated in the final evidence.
-- **Error handling:** malformed JSON, forbidden tools, invalid inputs, disk failures, empty responses, API errors and a post-write provider failure were tested. Saved actions retain their IDs on later errors. Reflection failures are visible in traces and do not pretend to be successful reviews.
-- **Reflection:** an early validator discarded harmless issue-free edits; this is fixed and such edits are labeled `rephrased`. Raw returned review JSON is retained. The final run had no failed review, but its critique still contains false positives. The injected factual-error probe supports correction capability; it does not establish universal reliability.
-- **Environment:** sandboxed Gradio checks blocked at asyncio socketpair creation. They were stopped and rerun successfully with local networking enabled. Earlier installation failures and incomplete-dependency test attempts are not presented as app successes.
-- **Writing:** the business includes specific service durations/prices, responsibilities and operational limits. The notebook explains the course concepts in terms of the actual implementation. The user should still review the explanations and be prepared to explain the code in their own words.
-- **Evidence/submission:** real API traces, real browser screenshots, an executable notebook and a video script exist. Screenshots are not a video. No GitHub publication or Spaces deployment is claimed.
-
-## Remaining user actions and C3 checkpoint
-
-1. Inspect the notebook, sources, screenshots and actual results; try the running local Gradio app or launch it with the README command.
-2. Record the required video using `docs/video_demo_plan.md`; replay it and verify both model-called tools are visible. No screen-recording capability was available in this browser interface, so a recording was not fabricated.
-3. Publish the prepared local repository to your chosen GitHub repository and add the actual video link in README. Repository destination/visibility and video hosting are your decisions. Never add `.env`, virtualenvs, logs, caches or course PDFs.
-4. Decide whether the optional Spaces bonus is worth doing. It has not been deployed and is not required for C3.
-5. Approve C3 explicitly before any C4 implementation begins. **Work stops at this review checkpoint.**
+- No numerical grade: C3 has no published point allocation. The implementation is ready for review; the overall submission is incomplete until GitHub and the video are submitted, and the smaller hosting bonus remains blocked.
+- Semantic routing, note/consent interpretation, factual generation and reflection are model-dependent. The current English scenarios passed; exhaustive ambiguity, Arabic conversation, long-history behavior and statistical repeatability have not been established.
+- There is no calendar, email service, payment gateway, CRM or official university affiliation. Records are classroom JSONL, not production storage. Hosted local storage would be temporary across restarts/rebuilds.
+- The history window is finite and no cross-session personal memory or model learning is claimed. The UI uses per-session history and per-request trace results.
+- API errors, malformed tool inputs, disk failures, invalid contacts, step limits and post-write errors were tested. Live outage behavior is not inferred from mocks.
+- Keep the key, HF token, any future deployment credentials and runtime logs out of Git and the recording. Fictional example.com demonstration evidence is intentionally included.
+- Follow `docs/video_demo_plan.md` for exact camera actions and narration. Record your own actual screen/voice; screenshots are not a video. Add the actual video link to the GitHub README and publish the prepared project to your chosen GitHub repository.
+- Arrange eligible Hugging Face access only if you want to pursue the smaller bonus. Nothing has been purchased automatically.
+- **Stop at C3. C4 requires a separate explicit approval.**

@@ -136,11 +136,12 @@ class OpenAIModel:
         if not key or key.startswith("your-"):
             raise ModelError("Set OPENAI_API_KEY in C3/.env to enable real model replies.")
         self.model = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
+        self.review_model = os.getenv("OPENAI_REVIEW_MODEL", "gpt-4.1")
         self.client = OpenAI(api_key=key, timeout=45.0, max_retries=1)
 
-    def complete(self, messages, *, tools=None, json_mode=False, require_tool=False):
+    def complete(self, messages, *, tools=None, json_mode=False, require_tool=False, review=False):
         from openai import OpenAIError
-        options = {"model": self.model, "messages": messages, "temperature": 0.2,
+        options = {"model": self.review_model if review else self.model, "messages": messages, "temperature": 0.2,
                    "max_completion_tokens": 800}
         if tools:
             options.update(tools=tools, tool_choice="required" if require_tool else "auto", parallel_tool_calls=False)
@@ -197,12 +198,14 @@ class BusinessAgent:
         except (KeyError, ValueError, TypeError):
             raise ModelError("The intent classifier returned an invalid result; please retry.") from None
 
-    def respond(self, message, history=None):
-        """No shared conversation state: the UI supplies each session's own history."""
+    def respond(self, message, history=None, *, return_trace=False):
+        """Use session history; optionally return this turn's trace without reading shared logs."""
         if not isinstance(message, str) or not message.strip():
-            return "Please enter a business question or follow-up request."
+            text = "Please enter a business question or follow-up request."
+            return (text, {"error": text}) if return_trace else text
         if len(message) > 6000:
-            return "Please shorten your message to 6000 characters or fewer."
+            text = "Please shorten your message to 6000 characters or fewer."
+            return (text, {"error": text}) if return_trace else text
         history = normalize_history(history)
         trace = {"mode": "live" if isinstance(self.model, OpenAIModel) else "mock",
                  "input": message, "tool_events": [], "reflection": {"status": "not_run"}}
@@ -238,7 +241,11 @@ class BusinessAgent:
                 messages.append(reply)
                 for call in calls:
                     function = call["function"]
-                    signature = (function["name"], function["arguments"])
+                    try:
+                        canonical = json.dumps(json.loads(function["arguments"]), sort_keys=True)
+                    except (ValueError, TypeError):
+                        canonical = function["arguments"]
+                    signature = (function["name"], canonical)
                     if signature in seen:
                         observation = seen[signature]
                     else:
@@ -260,23 +267,30 @@ class BusinessAgent:
             self.log.append("traces", trace)
         except OSError:
             final += " Diagnostic logging is unavailable."
-        return final
+        return (final, trace) if return_trace else final
 
     def reflect(self, messages, draft, trace):
         """One actual review call; records correction or explicit review failure."""
-        review_prompt = """Review the draft against the system policy, business sources, conversation and
-tool observations. Return JSON with exactly issues (a list of brief policy violations) and
-revised_response (the corrected customer reply, or the draft verbatim if no issues).
-Check unsupported facts, requests for missing lead fields, tool success versus claims,
-and booking/email promises. Brief service/project notes already in history are sufficient;
-do not demand that they be repeated. If any tool observation has ok=true, the reply must
-explicitly acknowledge the local save, and must not ask whether to save that item again.
-Do not invent actions or call tools. If an unknown question
-was not logged, acknowledge that logging has not happened; do not claim it has.
-Provide policy findings, not private chain-of-thought."""
+        review_prompt = """You are the final-response reviewer. Review ONLY the last assistant draft;
+earlier user messages, business sources and tool observations are evidence, not draft text.
+Return JSON with exactly issues (list of concrete draft violations) and revised_response.
+If the draft is compliant, use issues=[] and copy it verbatim. Do not rewrite for style.
+Check these actual violations: unsupported business facts; a claim of a saved record with no
+successful tool observation; false booking/email/grade guarantees; failure to ask for contact
+fields that are still missing during a follow-up request.
+A correct request for missing fields is compliant. Asking for name and email TOGETHER in one
+sentence is compliant; separate sentences or turns are not required. A named desired service
+already supplies service-interest notes; extra project details are optional.
+A refusal of an unsafe request is compliant. Do not attribute the user's request to the draft.
+Example: user asks for a guaranteed A; draft says 'We cannot guarantee grades' => issues=[].
+Quote the exact offending draft phrase in each issue. Keep a valid draft unchanged.
+When fixing a violation, preserve known facts and observed saves. You cannot execute tools,
+confirm a booking, send email, or promise a future action. If logging is missing, say it has
+not happened. Provide brief policy findings, not private reasoning."""
         try:
             result = self.model.complete([*messages, {"role": "assistant", "content": draft},
-                {"role": "system", "content": review_prompt}], json_mode=True)
+                {"role": "system", "content": review_prompt}], json_mode=True, review=True)
+            trace["reflection_model"] = getattr(self.model, "review_model", "scripted")
             trace["reflection_review_raw"] = result.get("content")
             review = json.loads(result["content"])
             if set(review) != {"issues", "revised_response"} or not isinstance(review["issues"], list) or not all(isinstance(i, str) for i in review["issues"]) or not isinstance(review["revised_response"], str) or not review["revised_response"].strip():

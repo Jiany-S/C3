@@ -79,10 +79,10 @@ assert result.returncode == 0, 'Fix test failures before demonstrating.'"""),
 else:
     print('NOT RUN in this notebook execution: real API matrix. Set RUN_LIVE=true to opt in.')"""),
         markdown("## 11. Gradio ChatInterface\nThe same code is used by `python app.py`. Start locally with RUN_UI=true. For an explicitly chosen Colab run, change launch settings as needed and review public sharing before enabling it. Starting the UI does not prove API access; send the demo interactions and inspect actual tool records."),
-        code("""from app import build_demo
+        code("""from app import build_demo, launch_options
 demo = build_demo()
 if os.getenv('RUN_UI', 'false').lower() == 'true':
-    demo.launch(server_name='127.0.0.1', share=False, prevent_thread_lock=True)
+    demo.launch(**launch_options(), prevent_thread_lock=True)
 else:
     print('ChatInterface built; server launch disabled (RUN_UI=false).')
     demo.close()"""),
@@ -91,7 +91,7 @@ Read `docs/compliance_report.md` for actual outcomes and requirement-by-requirem
 
 Limits: semantic routing and notes/consent interpretation are model-dependent; a 12-case matrix is not exhaustive. Reflection is also model-dependent and may miss mistakes. Local file logging is for one process; hosted restarts may lose records. User chat is transmitted to OpenAI; local traces contain contact information, so use invented demo data and exclude logs from Git. History truncation can lose older contact details, in which case Mira should ask again. A newly restarted chat has no previous session memory.
 
-Submit a GitHub repository plus an actual video. Confirm keys, logs, virtual environments and course PDFs are excluded. Spaces deployment is optional and has not been authorized. This is the mandatory C3 review checkpoint: **do not start C4 until the user explicitly approves C3.**"""),
+Submit a GitHub repository plus an actual video. Confirm keys, logs, virtual environments and course PDFs are excluded. Spaces deployment is optional; consult the compliance report for actual deployment status. Permission or preparation alone is not proof of deployment. This is the mandatory C3 review checkpoint: **do not start C4 until the user explicitly approves C3.**"""),
     ]
     notebook = {"cells": cells, "metadata": {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
         "language_info": {"name": "python", "version": "3.11"}}, "nbformat": 4, "nbformat_minor": 5}

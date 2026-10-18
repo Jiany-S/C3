@@ -25,7 +25,7 @@ Copy-Item .env.example .env
 
 Edit `.env` locally, adding `OPENAI_API_KEY`. Keep it out of chat, videos and Git. The default model is `gpt-4.1-mini`, configurable with `OPENAI_MODEL`; an alternative must support Chat Completions, function tools, JSON mode, temperature and the output-token setting. `requirements.txt` contains runtime dependencies; `requirements-dev.txt` adds tests/notebook execution/PDF rebuilding. The tested Windows dependency snapshot is `evidence/environment.txt`; direct dependencies are pinned while transitive dependencies are resolved by pip.
 
-The application makes paid API calls only when a message is sent (or the live demo runner is explicitly run). One ordinary turn normally uses a router call, answer call, optional tool/observation calls and a reflection call. Reflection can be disabled with `ENABLE_REFLECTION=false`. No key is needed for deterministic tests or to start the UI, but actual model replies require one.
+The application makes paid API calls only when a message is sent (or a live verification runner is explicitly run). One ordinary turn normally uses a router call, answer call, optional tool/observation calls and a reflection call. Routing/replies use `OPENAI_MODEL=gpt-4.1-mini`; the reviewer uses `OPENAI_REVIEW_MODEL=gpt-4.1` by default after the smaller reviewer failed controlled checks. Reflection can be disabled with `ENABLE_REFLECTION=false`. No key is needed for deterministic tests or to start the UI, but actual model replies require one.
 
 ## Run Gradio
 
@@ -34,6 +34,8 @@ The application makes paid API calls only when a message is sent (or the live de
 ```
 
 Open the printed localhost URL, normally `http://127.0.0.1:7860`. Start a new chat to clear conversational context. `gr.ChatInterface` supplies that session's history; there is no shared global chat history. A missing key produces an explicit setup message, not a simulated business answer. The UI is local (`share=False`).
+
+The interface includes a responsive studio layout and downloadable business profile. **Classroom evidence · latest turn** shows the actual route, model-requested tool calls, observations, draft and reflection for the current turn. It receives that trace directly from the request, not from the most recent shared log entry. Set `SHOW_DEMO_EVIDENCE=false` to hide it locally; it is hidden automatically on Hugging Face Spaces.
 
 ## Run the notebook
 
@@ -82,9 +84,10 @@ Recent 24 user/assistant messages are short-term memory; current tool calls and 
 .\.venv\Scripts\python.exe -m pytest tests -q --junitxml=evidence/pytest.xml
 .\.venv\Scripts\python.exe scripts/smoke_gradio.py
 .\.venv\Scripts\python.exe scripts/run_live_demo.py
+.\.venv\Scripts\python.exe scripts/check_live_reflection.py
 ```
 
-The first command uses **scripted model outputs** and installed SDK types. It tests source loading, three actual branches, missing/invalid arguments, lead/feedback writes, observation return, memory isolation, API errors, step limits and reflection. It cannot establish model intelligence. The second runs a real Gradio HTTP server and queue/API with a clearly labeled **mock model callback**. The third uses **real OpenAI calls** and invented data; it saves twelve realistic cases plus raw tool/reflection traces under ignored `evidence/live/<UTC timestamp>/`. Its route/tool checks are automatic; answers still need human quality review.
+The first command uses **scripted model outputs** and installed SDK types. It tests source loading, three actual branches, missing/invalid arguments, lead/feedback writes, observation return, memory isolation, API errors, step limits and reflection. It cannot establish model intelligence. The second runs a real Gradio HTTP server and queue/API with a clearly labeled **mock model callback**. The third uses **real OpenAI calls** and invented data; it saves twelve realistic cases plus raw tool/reflection traces under ignored `evidence/live/<UTC timestamp>/`. Its route/tool checks are automatic; answers still need human quality review. The fourth calls the real reviewer on six explicitly controlled drafts: four correct drafts to preserve, one injected bad price, and one injected false booking. Results are preserved in `evidence/reflection_check/`; these are controlled fixtures, not naturally generated failures.
 
 See [verification status and strict self-evaluation](docs/compliance_report.md), the [requirements checklist](docs/requirements_checklist.md), and [exact video script](docs/video_demo_plan.md). The reviewed real API run is preserved in [evidence/demo](evidence/demo/README.md); actual browser screenshots and traces are in `evidence/browser/`. Do not infer a live pass from a mocked test. Evidence records actual outcomes and limitations.
 
@@ -92,7 +95,9 @@ See [verification status and strict self-evaluation](docs/compliance_report.md),
 
 The C3 PDF requires a **GitHub repository and demonstration video**. Record the interactions in the video plan, upload the video using your preferred permitted method, and put the real video link here before submission. **Video: not recorded yet.** Publish only the C3 project; do not upload keys, runtime logs, the virtual environment, notebook checkpoints or the professor's course PDFs. Inspect `git status --ignored` before pushing. Source hashes in `docs/source_manifest.json` document the local materials reviewed without copying them into the repository.
 
-Hugging Face Spaces is an optional smaller bonus and has not been deployed. README metadata and app.py provide a starting point. Before an approved deployment, change the bind address to `0.0.0.0`, store the key as a Space secret, and decide how to preserve/restrict lead data: local files alone are not durable hosted storage. Do not expose this classroom prototype publicly with real customer data.
+Hugging Face Spaces is an optional smaller bonus. The approved no-cost deployment was attempted on CPU Basic and ZeroGPU, but both were rejected by Hugging Face with HTTP 402 account-eligibility requirements. **No Space is deployed, no secrets were uploaded, and no purchase was made.** See `evidence/space_deployment.json`.
+
+For eligible access, `scripts/prepare_space.py` builds an eight-file upload folder in ignored `tmp/space_upload/`; its allowlist excludes keys, logs, tests and course material. The manifest is `evidence/space_package.json`. `scripts/deploy_space.py --approved` publishes only that reviewed package to the approved account/repository, with private API/password secrets; it is not run merely by importing it. Only `cpu-basic` or `zero-a10g` are permitted by the script, and no paid plan or hardware purchase is implemented. The app binds to `0.0.0.0` on Spaces, requires `SPACE_ACCESS_PASSWORD`, and hides classroom traces. Future demo credentials are written only to ignored `tmp/space_credentials.txt`; share them with the professor separately, never in the recording or Git. Space filesystem logs are temporary, not durable production storage. Do not claim the bonus until the hosted app is actually running and verified.
 
 ## Known limitations
 

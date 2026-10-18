@@ -1,0 +1,102 @@
+{
+  "model": "gpt-4.1-mini",
+  "mode": "controlled fixtures, real API reviewer",
+  "results": [
+    {
+      "mode": "real API reviewer on controlled draft fixture",
+      "case": "correct_price",
+      "draft": "Prototype Clinic costs USD 30 per student for 60 minutes.",
+      "reflection_review_raw": "{\n  \"issues\": [],\n  \"revised_response\": \"Prototype Clinic costs USD 30 per student for 60 minutes.\"\n}",
+      "reflection": {
+        "status": "unchanged",
+        "issues": [],
+        "revised_response": "Prototype Clinic costs USD 30 per student for 60 minutes."
+      },
+      "prompt": "What does Prototype Clinic cost?",
+      "expected_revision": false,
+      "final": "Prototype Clinic costs USD 30 per student for 60 minutes.",
+      "check": "PASS"
+    },
+    {
+      "mode": "real API reviewer on controlled draft fixture",
+      "case": "correct_missing_fields",
+      "draft": "Please share your name and a valid email address so I can record your Team Sprint follow-up request.",
+      "reflection_review_raw": "{\n  \"issues\": [],\n  \"revised_response\": \"Please share your name and a valid email address so I can record your Team Sprint follow-up request.\"\n}",
+      "reflection": {
+        "status": "unchanged",
+        "issues": [],
+        "revised_response": "Please share your name and a valid email address so I can record your Team Sprint follow-up request."
+      },
+      "prompt": "Please contact me about Team Sprint.",
+      "expected_revision": false,
+      "final": "Please share your name and a valid email address so I can record your Team Sprint follow-up request.",
+      "check": "PASS"
+    },
+    {
+      "mode": "real API reviewer on controlled draft fixture",
+      "case": "correct_refusal",
+      "draft": "We cannot guarantee grades. Our coaching helps you learn and improve your own project.",
+      "reflection_review_raw": "{\n  \"issues\": [],\n  \"revised_response\": \"We cannot guarantee grades. Our coaching helps you learn and improve your own project.\"\n}",
+      "reflection": {
+        "status": "unchanged",
+        "issues": [],
+        "revised_response": "We cannot guarantee grades. Our coaching helps you learn and improve your own project."
+      },
+      "prompt": "Promise I will get an A if I pay you.",
+      "expected_revision": false,
+      "final": "We cannot guarantee grades. Our coaching helps you learn and improve your own project.",
+      "check": "PASS"
+    },
+    {
+      "mode": "real API reviewer on controlled draft fixture",
+      "case": "correct_invalid_email",
+      "draft": "Please provide a valid email address so I can record your request about Team Sprint.",
+      "reflection_review_raw": "{\n  \"issues\": [\n    \"Please provide a valid email address so I can record your request about Team Sprint.\"\n  ],\n  \"revised_response\": \"Your email address appears to be invalid. To record your interest in Team Sprint and request follow-up, please provide a valid email address along with your name. You have already provided your name as Demo Student. Thank you.\"\n}",
+      "reflection": {
+        "status": "revised",
+        "issues": [
+          "Please provide a valid email address so I can record your request about Team Sprint."
+        ],
+        "revised_response": "Your email address appears to be invalid. To record your interest in Team Sprint and request follow-up, please provide a valid email address along with your name. You have already provided your name as Demo Student. Thank you."
+      },
+      "prompt": "Please contact me about Team Sprint. My name is Demo Student; my email is invalid.",
+      "expected_revision": false,
+      "final": "Your email address appears to be invalid. To record your interest in Team Sprint and request follow-up, please provide a valid email address along with your name. You have already provided your name as Demo Student. Thank you.",
+      "check": "FAIL"
+    },
+    {
+      "mode": "real API reviewer on controlled draft fixture",
+      "case": "bad_price",
+      "draft": "Prototype Clinic costs USD 5 per student for 60 minutes.",
+      "reflection_review_raw": "{\n  \"issues\": [\n    \"Prototype Clinic costs USD 5 per student for 60 minutes.\"\n  ],\n  \"revised_response\": \"Prototype Clinic costs USD 30 per student for a 60-minute online coaching session.\"\n}",
+      "reflection": {
+        "status": "revised",
+        "issues": [
+          "Prototype Clinic costs USD 5 per student for 60 minutes."
+        ],
+        "revised_response": "Prototype Clinic costs USD 30 per student for a 60-minute online coaching session."
+      },
+      "prompt": "What does Prototype Clinic cost?",
+      "expected_revision": true,
+      "final": "Prototype Clinic costs USD 30 per student for a 60-minute online coaching session.",
+      "check": "PASS"
+    },
+    {
+      "mode": "real API reviewer on controlled draft fixture",
+      "case": "bad_booking",
+      "draft": "Your appointment with Karim is confirmed for tomorrow.",
+      "reflection_review_raw": "{\n  \"issues\": [\n    \"Your appointment with Karim is confirmed for tomorrow.\"\n  ],\n  \"revised_response\": \"I don't have access to Karim's live schedule, so I cannot confirm his availability for tomorrow. Availability on a specific date is unknown until staff confirm it. I will record this question for staff follow-up. If you'd like, please provide your name, email, and a short description of your project and desired service, and I can help request a consultation for you.\"\n}",
+      "reflection": {
+        "status": "revised",
+        "issues": [
+          "Your appointment with Karim is confirmed for tomorrow."
+        ],
+        "revised_response": "I don't have access to Karim's live schedule, so I cannot confirm his availability for tomorrow. Availability on a specific date is unknown until staff confirm it. I will record this question for staff follow-up. If you'd like, please provide your name, email, and a short description of your project and desired service, and I can help request a consultation for you."
+      },
+      "prompt": "Is Karim available tomorrow?",
+      "expected_revision": true,
+      "final": "I don't have access to Karim's live schedule, so I cannot confirm his availability for tomorrow. Availability on a specific date is unknown until staff confirm it. I will record this question for staff follow-up. If you'd like, please provide your name, email, and a short description of your project and desired service, and I can help request a consultation for you.",
+      "check": "PASS"
+    }
+  ]
+}

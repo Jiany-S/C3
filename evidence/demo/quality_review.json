@@ -1,56 +1,56 @@
 {
-  "reviewer": "Codex manual inspection of actual answers and saved records; not a human review",
-  "source_run": "20261018T104346Z",
+  "reviewer": "Codex inspection of actual answers and tool records, not human approval",
+  "source_run": "20261018T114513Z",
+  "review_model": "gpt-4.1",
   "cases": {
     "general_price": {
       "functional_review": "PASS",
-      "notes": "Matches source facts and expected tool outcome."
+      "notes": "Observed answer and saved-tool behavior match the supplied business facts and intended route."
     },
     "price_not_lead": {
       "functional_review": "PASS",
-      "notes": "Matches source facts and expected tool outcome."
+      "notes": "Observed answer and saved-tool behavior match the supplied business facts and intended route."
     },
     "lead_missing_fields": {
       "functional_review": "PASS",
-      "notes": "Matches source facts and expected tool outcome."
+      "notes": "Observed answer and saved-tool behavior match the supplied business facts and intended route."
     },
     "lead_followup": {
       "functional_review": "PASS",
-      "notes": "Uses prior project notes, saves actual supplied contact, acknowledges local save and response target as an aim."
+      "notes": "Actual supplied contact saved with prior API project notes; no booking or email claim."
     },
     "memory_followup": {
       "functional_review": "PASS",
-      "notes": "Matches source facts and expected tool outcome."
+      "notes": "Observed answer and saved-tool behavior match the supplied business facts and intended route."
     },
     "unknown_policy": {
       "functional_review": "PASS",
-      "notes": "Matches source facts and expected tool outcome."
+      "notes": "Observed answer and saved-tool behavior match the supplied business facts and intended route."
     },
     "explicit_feedback": {
       "functional_review": "PASS",
-      "notes": "Matches source facts and expected tool outcome."
+      "notes": "Observed answer and saved-tool behavior match the supplied business facts and intended route."
     },
     "mixed_known_unknown": {
       "functional_review": "PASS",
-      "notes": "Correct published price, scholarship described as unpublished rather than categorically nonexistent; actual feedback record saved."
+      "notes": "Observed answer and saved-tool behavior match the supplied business facts and intended route."
     },
     "exact_availability": {
       "functional_review": "PASS",
-      "notes": "Matches source facts and expected tool outcome."
+      "notes": "Observed answer and saved-tool behavior match the supplied business facts and intended route."
     },
     "decline_contact": {
       "functional_review": "PASS",
-      "notes": "Matches source facts and expected tool outcome."
+      "notes": "Observed answer and saved-tool behavior match the supplied business facts and intended route."
     },
     "invalid_email": {
       "functional_review": "PASS",
-      "notes": "Correctly rejects invalid email and saves nothing, but redundantly asks for project/service notes despite Team Sprint already being stated.",
-      "answer_efficiency": "PARTIAL"
+      "notes": "Asks only for a valid email, reusing the supplied name and Team Sprint notes; nothing invalid saved."
     },
     "unsupported_request": {
       "functional_review": "PASS",
-      "notes": "Matches source facts and expected tool outcome."
+      "notes": "Observed answer and saved-tool behavior match the supplied business facts and intended route."
     }
   },
-  "limits": "One run per case; no statistical robustness claim. Raw human_quality_review fields remain PENDING for user review."
+  "limits": "One live run per case, with separate controlled reviewer fixtures; not statistical proof."
 }

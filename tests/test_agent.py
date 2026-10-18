@@ -174,6 +174,24 @@ def test_repeat_call_one_write(tmp_path):
     assert len(records(tmp_path, "feedback")) == 1
 
 
+def test_semantically_identical_calls_share_observation(tmp_path):
+    args = {"email": "demo@example.com", "name": "Demo Student", "message": "Team Sprint"}
+    second = call("record_customer_interest", args, "call_2")
+    second['tool_calls'][0]['function']['arguments'] = json.dumps(dict(reversed(list(args.items()))), indent=2)
+    agent, _ = make_agent(tmp_path, route("lead"), call("record_customer_interest", args), second, text_reply("Recorded."))
+    reply, trace = agent.respond("Contact me about Team Sprint. I'm Demo Student, demo@example.com.", return_trace=True)
+    assert reply == 'Recorded.' and len(records(tmp_path, 'leads')) == 1
+    assert trace['tool_events'][0]['observation']['record_id'] == trace['tool_events'][1]['observation']['record_id']
+
+
+def test_returned_trace_is_isolated_per_turn(tmp_path):
+    agent, _ = make_agent(tmp_path, route('general'), text_reply('One'), route('general'), text_reply('Two'))
+    _, first = agent.respond('first', return_trace=True)
+    _, second = agent.respond('second', return_trace=True)
+    assert first['input'] == 'first' and second['input'] == 'second'
+    assert first is not second and first['final'] == 'One'
+
+
 def test_loop_limit(tmp_path):
     c = call("record_feedback", {"question": "evenings"})
     agent, model = make_agent(tmp_path, route("feedback"), *[c] * 5)

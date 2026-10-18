@@ -1,0 +1,22 @@
+{
+  "checked_utc": "2026-10-18T11:52:41.861533+00:00",
+  "repo_id": "Jiany-S/cedarbridge-c3",
+  "status": "BLOCKED - account eligibility",
+  "repo_exists": false,
+  "attempts": [
+    {
+      "hardware": "cpu-basic",
+      "http_status": 402,
+      "provider_message": "Static Spaces are free for everyone, but hosting Gradio and Docker Spaces on free cpu-basic requires a PRO subscription."
+    },
+    {
+      "hardware": "zero-a10g",
+      "http_status": 402,
+      "provider_message": "You must be subscribed to PRO to host Spaces with ZeroGPU. If you recently created your account, please wait 30 days or request a community grant."
+    }
+  ],
+  "purchase_made": false,
+  "secrets_uploaded": false,
+  "runtime_verified": false,
+  "bonus_claimed": false
+}
