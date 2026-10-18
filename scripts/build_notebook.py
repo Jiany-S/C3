@@ -26,7 +26,7 @@ The default run loads both sources, shows the actual implementation, executes de
 ## 1. Business and goal
 Mira explains project coaching services, collects requested follow-up leads, and records feedback or unknown policies. Target audience: university students building their own projects. No university affiliation, calendar, payments, email sending, ghostwriting, or guaranteed grades. See the profile for authoritative fictional facts.
 
-The C3 routing workflow selects a handler. Within that handler, the LLM decides whether to call a tool; Python executes the action and returns the observation. This is a limited tool-using agent, not reinforcement learning or a full planning system. C4 has not been started."""),
+The C3 routing workflow selects a handler. Within that handler, the LLM decides whether to call a tool; Python executes the action and returns the observation. This is a limited tool-using agent, not reinforcement learning or a full planning system."""),
         code("""from pathlib import Path
 import os, sys, json, inspect, subprocess
 from IPython.display import display, Markdown, Code
@@ -87,11 +87,11 @@ else:
     print('ChatInterface built; server launch disabled (RUN_UI=false).')
     demo.close()"""),
         markdown("""## 12. Evidence, limitations and submission
-Read `docs/compliance_report.md` for actual outcomes and requirement-by-requirement status, `evidence/` for verification artifacts, and `docs/video_demo_plan.md` for exact recording interactions.
+See `docs/compliance_report.md` for the requirement checklist and verification results, `evidence/` for saved runs, and the README for the demonstration video.
 
 Limits: semantic routing and notes/consent interpretation are model-dependent; a 12-case matrix is not exhaustive. Reflection is also model-dependent and may miss mistakes. Local file logging is for one process; hosted restarts may lose records. User chat is transmitted to OpenAI; local traces contain contact information, so use invented demo data and exclude logs from Git. History truncation can lose older contact details, in which case Mira should ask again. A newly restarted chat has no previous session memory.
 
-Submit a GitHub repository plus an actual video. Confirm keys, logs, virtual environments and course PDFs are excluded. Spaces deployment is optional; consult the compliance report for actual deployment status. Permission or preparation alone is not proof of deployment. This is the mandatory C3 review checkpoint: **do not start C4 until the user explicitly approves C3.**"""),
+The repository and recorded demonstration are linked in the README. Keys, runtime logs, virtual environments, and course PDFs are excluded from Git. Reflection is implemented; the optional Hugging Face deployment remains incomplete because of account eligibility."""),
     ]
     notebook = {"cells": cells, "metadata": {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
         "language_info": {"name": "python", "version": "3.11"}}, "nbformat": 4, "nbformat_minor": 5}

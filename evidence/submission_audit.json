@@ -4,8 +4,9 @@
   "excluded_env_virtualenv_logs_cache_course_text": "PASS",
   "staged_pdf_exact_byte_match": "PASS",
   "git_whitespace_check": "PASS",
-  "remote_publication": "NOT DONE",
-  "video": "NOT RECORDED",
-  "c4_implementation": "NOT STARTED",
-  "note": "Actual fictional API/browser evidence is intentionally included; raw runtime directories remain ignored."
+  "remote_publication": "Published at https://github.com/Jiany-S/C3",
+  "video": "Student recording completed; edited MP4 linked in README",
+  "note": "Fictional API evidence retained unchanged. Local video and runtime files excluded from Git.",
+  "video_url": "https://drive.google.com/file/d/1V--RXECcvz5hUiluAs0msjgPW3UpY67B/view?usp=sharing",
+  "video_sharing_access": "Not independently verified; Drive page unavailable to inspection tool"
 }
